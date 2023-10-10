@@ -6,21 +6,42 @@ const port = 3001;
 
 const app = express()
 const data = [{
-    "what is Express js": "Express.js, often referred to simply as Express, is a popular and widely-used web application framework for Node.js. It provides a set of features and tools for building web and mobile applications, particularly web servers and APIs (Application Programming Interfaces). Express.js simplifies the process of building robust and scalable web applications in Node.js by offering a minimalistic and flexible structure.",
-    "Its Features": {
-        "1": "Routing: Express allows you to define routes that map HTTP methods (GET, POST, PUT, DELETE, etc.) to specific URL patterns. This makes it easy to handle different types of requests and create RESTful APIs.",
-        "2": "Middleware: Middleware functions in Express provide a way to execute code in a request-response cycle. They can be used for tasks like authentication, logging, data parsing, and error handling. Middleware functions can be organized in a pipeline and executed in a specific order.",
-        "3": "Templating: Although Express itself doesn't include a template engine, it's easy to integrate popular template engines like Pug, EJS, or Handlebars for rendering dynamic HTML views.",
-        "4": "Static Files: You can serve static files such as images, stylesheets, and client-side JavaScript using Express's built-in middleware for this purpose.",
-        "5": "Database Integration: Express can work with various databases and data storage solutions. It's often used in conjunction with databases like MongoDB, MySQL, or PostgreSQL through appropriate Node.js libraries or Object-Relational Mapping (ORM) tools.",
+    "MongoDb Handson 1": {
+        "all Questions": {
+            "1": " Create a database , give it name like Human_Resource",
+            "2": " Create a collection inside this named employee",
+            "3": " Query the collection employee and list all the documents",
+            "4": " Query the collection employee and list the employees who are having salary more than 30000",
+            "5": ' Query the collection "employee" and list the employees who are having experience more than 2 years',
+            "5": ' Query the collection "employee" and list the employees who are graduated after 2015 and having experience more than 1 year',
+            "6": ' Query the collection "employee" and update the salary of the employee whose salary is greater than 70000 to 65000.',
+            "7": ' Delete all the documents from "employee" where last company is Y',
+        },
+        "Question with Answer": {
+            "1": " Create a database , give it name like Human_Resource",
+            "1Ans": "use Human_Resource",
+            "2": " Create a collection inside this named employee",
+            "2Ans": " db.createCollection('employee')",
+            "for Below question need some data so first create it with ": 'db.employee.insertMany({"firstName": "John", "lastName": "Doe","salary": "25000","department": "HR","lastCompany": "X","lastSalary": "10000","overallExp": "2","contactInfo": "1234567890", "yearGrad": "2016", "gradStream": "CSE" },{ "firstName": "Rohan", "lastName": "Jame", "salary": "30000", "department": "Technical", "lastCompany": "Y", "lastSalary": "15000", "overallExp": "1", "contactInfo": "1234567860", "yearGrad": "2015", "gradStream": "CSE"},{"firstName": "Jame","lastName": "Doe","salary": "35000","department": "Accounts","lastCompany": "Z","lastSalary": "20000","overallExp": "1","contactInfo": "123567890","yearGrad": "2019","gradStream": "ECE"}, {"firstName": "Sao","lastName": "Avika","salary": "30000","department": "Sales","lastCompany": "Y","lastSalary": "15000","overallExp": "2","contactInfo": "1234567860","yearGrad": "2015","gradStream": "CSE"}, {"firstName": "Jame","lastName": "roh","salary": "35000","department": "Accounts","lastCompany": "Z","lastSalary": "15000","overallExp": "2","contactInfo": "123567890","yearGrad": "2019","gradStream": "EEE"}, {"firstName": "Rohan","lastName": "Jame","salary": "30000","department": "Technical","lastCompany": "Y","lastSalary": "15000","overallExp": "1","contactInfo": "1234567860","yearGrad": "2015","gradStream": "CSE"}, {"firstName": "Jame","lastName": "Doe","salary": "35000","department": "Accounts","lastCompany": "Z","lastSalary": "20000","overallExp": "1","contactInfo": "123567890","yearGrad": "2019","gradStream": "ECE"}, {"firstName": "Sao","lastName": "Avika","salary": "30000","department": "Sales","lastCompany": "Y","lastSalary": "15000","overallExp": "2","contactInfo": "1234567860","yearGrad": "2015","gradStream": "CSE"}, {"firstName": "Jame","lastName": "Doe","salary": "35000","department": "Accounts","lastCompany": "Z","lastSalary": "15000","overallExp": "2","contactInfo": "123567890","yearGrad": "2019","gradStream": "EEE"}, {"firstName": "Rohan","lastName": "Jame","salary": "30000","department": "Technical","lastCompany": "Y","lastSalary": "15000","overallExp": "1","contactInfo": "1234567860","yearGrad": "2015","gradStream": "CSE"}, {"firstName": "Jame","lastName": "Doe","salary": "35000","department": "Accounts","lastCompany": "Z","lastSalary": "20000","overallExp": "1","contactInfo": "123567890","yearGrad": "2019","gradStream": "ECE"}, {"firstName": "Sao","lastName": "Avika","salary": "30000","department": "Sales","lastCompany": "Y","lastSalary": "15000","overallExp": "2","contactInfo": "1234567860","yearGrad": "2015","gradStream": "CSE"}, {"firstName": "Jame","lastName": "Doe","salary": "35000","department": "Accounts","lastCompany": "Z","lastSalary": "15000","overallExp": "2","contactInfo": "123567890","yearGrad": "2019","gradStream": "EEE"}) ',
+
+            "3": " Query the collection employee and list all the documents",
+            "3Ans": "db.employee.find()",
+            "4": " Query the collection employee and list the employees who are having salary more than 30000",
+            "4Ans": ' db.employee.find({"salary":{$gt:"30000"}})',
+            "5": ' Query the collection "employee" and list the employees who are having experience more than 2 years',
+            "5Ans": 'db.employee.find({"overallExp":{$gt:"2"}})',
+            "6": ' Query the collection "employee" and list the employees who are graduated after 2015 and having experience more than 1 year',
+            "6Ans": 'db.employee.find( {"yearGrad":{$gt:"2015"}},{"overallExp":{$gt:"1"} })',
+            "7": ' Query the collection "employee" and update the salary of the employee whose salary is greater than 70000 to 65000.',
+            "7Ans": 'db.employee.updateMany({"salary":"20000"},{$set :{"salary":"25000"}})',
+            "8": ' Delete all the documents from "employee" where last company is Y',
+            "8Ans": ' db.employee.deleteMany({"lastCompany":"Y"})',
+        }
     }
 }]
-app.get("/About", (req, res) => {
-    res.send(data)
-})
 
 app.get("/", (req, res) => {
-    res.send("Hello Dear  :-you wants to se the data go to About page")
+    res.send(data)
 })
 
 app.listen(port, () => {
